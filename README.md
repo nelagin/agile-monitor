@@ -10,7 +10,7 @@ First, configure:
 ```
 ./config/config.json -> setup accordingly to your team & process
 ./config/jira_credentials.json -> input your login
-./config/google_credentials.json -> use bsw-tools bot service account json from the vault
+./config/google_credentials.json -> use bot service account json, obtainable from GCE console
 ```
 
 From the repository folder, execute:

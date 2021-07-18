@@ -29,9 +29,7 @@ Project is dedicated for automating focus factor, loe, accuracy and other useful
 It is designed to be used in two mode:
 
 1) First, when lead launches it with according to his team config setup
-2) Second, when lead can setup locally script in a mode that allows to trigger individual developers sheet updates (on_demand_mode)
-
-In the future it is expected that we will migrate this project over into K8S - physically it is already possible as docker image can be easily built and helm charts setup to support individual teams setup.
+2) Second, when lead can setup locally (or e.g. in K8S) script in a mode that allows to trigger individual developers sheet updates (on_demand_mode)
 
 ## Overview
 

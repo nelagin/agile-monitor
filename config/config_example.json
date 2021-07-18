@@ -1,0 +1,128 @@
+{   
+    "team" : "The Best Team",
+    "developers" : [
+        {
+            "name" : "xxx",
+            "login" : "yyy",
+            "email" : "xxx@zzz.net", // email with which developer & team spreadsheet will be shared if share_with_active_developers is set
+            "max_points" : 9, // default maximum points developer can achieve in an iteration
+
+            "active" : [ // timeframes when developer was working for the given team
+                "2019-01-01 - 2019-04-06", //format is "yyyy-mm-dd - yyyy-mm-dd"
+                "2020-01-01 - 2020-02-02",
+                "2020-03-01 - 3000-01-01", // means that developer is currently within the team 
+            ],
+            "vacations" : [ // timeframes when developer is ill or on holidays/vacations.
+                            // max_points for given person is then calculated as (work_days - vacation_days)/work_days * max_points.
+                            // e.g. if a person was ill for 3 days on a working week, then max_points = (5-3/5)*9 = 3.6
+                "2020-01-01 - 2020-03-01", //format is "yyyy-mm-dd - yyyy-mm-dd"
+                "2020-04-05 - 2020-04-06"
+            ],
+            "exclude_from_focus": 0 // if developer to be always excluded from team focus factor, but still report for him is to be created.
+        }
+    ],
+
+    "jira_connector" : {
+        "server" : "https://jira.zzz.net/",
+        "projects" : ["XXX", "YYY"]
+    },
+
+    "issues_monitor" : {
+        "monitor_start_date" : { // for your team setup so to match iteration. e.g. if you accept on demo on tuesday, start monitor from wed
+            "year": 2018,
+            "month" : 9,
+            "day" : 3
+        },
+        "monitor_tick_days" : 7, // sprint/iteration length
+
+        "continuous_status_categories" : { // categories that can be counted multiple times through periods. e.g. for resolved, issue can make it only once into the category
+            "backlog" : 1,
+            "flow_error" : 1,
+            "todo"  : 1,
+            "wip"   : 1,
+            "qa" : 1
+        },
+
+        "categories_priority" : { // to denote which category follow which in our process,
+                                  // accepted on demo is a separate case and is evaluated solely on "Accepted on Demo" checkbox,
+                                  // irrelevantly to the issue status
+            "backlog" : 1,
+            "flow_error" : 1,
+            "todo" : 1,
+            "rejected" : 1,
+
+            "wip" : 2,
+
+            "qa" : 3,
+
+            "accepted_on_demo" : 0,
+            "resolved" : 4
+        },
+
+        "statuses_categories" : { // mapping between jira workflow & categories
+            "backlog" : {
+                "backlog" : 1
+            },
+
+            "flow_error" : {
+                "flow error" : 1
+            },
+
+            "todo" : {
+                "sprint" : 1
+            },
+
+            "wip" : {
+                "development" : 1,
+                "specification" : 1,
+                "investigation" : 1,
+                "review" : 1
+            },
+
+            "accepted_on_demo" : {
+                "accepted_on_demo" : 1
+            },
+
+            "qa" : {
+                "ready for qa" : 1,
+                "qa" : 1,
+                "qa_passed" : 1,
+                "merged into develop" : 1
+            },
+
+            "resolved" : {
+                "resolved" : 1,
+                "merged into feature" : 1,
+                "deployed on prod" : 1
+            },
+
+            "rejected" : {
+                "rejected" : 1
+            }
+        }
+    },
+
+    "google_spreadsheet_writer" : {
+
+        // sheets that will not get purged when spreadsheet is reprocessed
+        "custom_sheets" : [
+            "Graphs"
+        ],
+
+        // categories which will get aggregated on separate All History tab for both developers & team
+        "categories_to_aggregate" : ["resolved", "accepted_on_demo"],
+
+        "sharing" : { // with whome to share results
+            "share_with_emails" : [
+                {
+                    "email" : "xxx@yyy.net",
+                    "perm_type" : "user",
+                    "role" : "writer"
+                }
+            ],
+            "share_with_active_developers" : 0
+        },
+
+        "recreate_helper_worksheet" : 0 // if Helper worksheet needs re-creation (due to mapping change for e.g.)
+    }
+}
